@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import logging
 import smtplib
 import requests
 import time
@@ -58,7 +59,6 @@ def send_telegram_message(message):
     try:
         response = requests.post(url, data=payload)
         response.raise_for_status()
-        print(message)
     except requests.RequestException as e:
         print(f"Error sending Telegram message: {e}")
 
@@ -92,29 +92,37 @@ def main():
             token_address = token_info['address']
             price = get_token_price(token_address)
             if price is not None:
+                formatted_price = f"{price:.8f}"
 
                 # TODO only print if debug enabled
                 # TODO dockerize
                 # TODO add docstrings for methods
                 # BUG when alerting once and saving back configuration file
 
-                print(f"The current price of {token_name.upper()} is: {price}")
+                print(f"The current price of {token_name.upper()} is: {formatted_price}")
                 for condition_info in token_info['conditions']:
                     if condition_info.get('enabled', True):
                         condition = condition_info['condition']
                         target_price = condition_info['price']
                         
-                        if should_alert(price, condition, target_price):
-                            message = f"\N{POLICE CARS REVOLVING LIGHT} *Alert*: The price of {token_name.upper()} is {condition.replace('_', ' ')} {target_price}: *{price}*"
+                        # if should_alert(price, condition, target_price):
+                        if True:
+                            message = (
+                                f"\N{POLICE CARS REVOLVING LIGHT} *Alert*: {token_name.upper()} is "
+                                f"{condition.replace('_', ' ')} {target_price:.8f}!\n"
+                                f"The price of *{token_name.upper()}* is *{formatted_price}*"
+                            )
                             send_telegram_message(message)
+                            print(message)
                             # TODO review email alert
                             # send_email(f"Price Alert: {token_name}", message)    
 
+                            # TODO define alert once behavior
                             # Disable the condition (alert once)
-                            condition_info['enabled'] = False
-                            config['tokens'][token_name] = json.dumps(token_info, indent=4)
-                            with open('settings.cfg', 'w') as configfile:
-                                config.write(configfile)
+                            # condition_info['enabled'] = False
+                            # config['tokens'][token_name] = json.dumps(token_info, indent=4)
+                            # with open('settings.cfg', 'w') as configfile:
+                            #     config.write(configfile)
         # Wait a bit
         time.sleep(5)
 
