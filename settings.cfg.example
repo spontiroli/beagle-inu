@@ -1,0 +1,60 @@
+[birdeye]
+api = BIRD_EYE_API
+
+[tokens]
+kitty = {
+	    "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+	    "conditions": [
+	        {
+	            "condition": "greater_than",
+	            "price": 0.008,
+	            "enabled": false
+	        },
+	        {
+	            "condition": "less_than",
+	            "price": 0.01,
+	            "enabled": false
+	        }
+	    ]
+	}
+sloth = {
+	    "address": "HQ7DaoiUxzC2K1Dr7KXRHccNtXvEYgNvoUextXe8dmBh",
+	    "conditions": [
+	        {
+	            "condition": "equal",
+	            "price": 0.013898141945560057,
+	            "enabled": true
+	        },
+	        {
+	            "condition": "greater_than",
+	            "price": 0.01,
+	            "enabled": false
+	        }
+	    ]
+	}
+gme = {
+	    "address": "8wXtPeU6557ETkp9WHFY1n1EcU6NxDvbAggHGsMYiHsB",
+	    "conditions": [
+	        {
+	            "condition": "greater_than",
+	            "price": 0.009,
+	            "enabled": false
+	        },
+	        {
+	            "condition": "greater_than",
+	            "price": 0.03,
+	            "enabled": true
+	        }
+	    ]
+	}
+
+[telegram]
+bot_token = TELEGRAM_BOT_TOKEN
+chat_id = TELEGRAM_CHAT_ID
+
+[email]
+smtp_server = 
+smtp_port = 
+email_from = 
+email_to = 
+email_app_password = 
