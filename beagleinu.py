@@ -105,8 +105,7 @@ def main():
                         condition = condition_info['condition']
                         target_price = condition_info['price']
                         
-                        # if should_alert(price, condition, target_price):
-                        if True:
+                        if should_alert(price, condition, target_price):
                             message = (
                                 f"\N{POLICE CARS REVOLVING LIGHT} *Alert*: {token_name.upper()} is "
                                 f"{condition.replace('_', ' ')} {target_price:.8f}!\n"
