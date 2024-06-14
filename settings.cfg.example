@@ -53,8 +53,8 @@ bot_token = TELEGRAM_BOT_TOKEN
 chat_id = TELEGRAM_CHAT_ID
 
 [email]
-smtp_server = 
-smtp_port = 
-email_from = 
-email_to = 
-email_app_password = 
+smtp_server = SMTP_SERVER
+smtp_port = SMTP_PORT
+email_from = EMAIL_FROM
+email_to = EMAIL_TO
+email_app_password = EMAIL_APP_PASSWORD
